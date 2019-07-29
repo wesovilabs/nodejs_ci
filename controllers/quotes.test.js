@@ -31,8 +31,6 @@ describe( 'listQuotes', () =>{
                     if (err) {
                         throw err;
                     } else {
-                        console.log('removing database')
-
                         return setup();
                     }
                 }
@@ -46,7 +44,6 @@ describe( 'listQuotes', () =>{
     });
 
     beforeAll(async () => {
-        console.log('beforeAll')
         connection = await MongoClient.connect(global.__MONGO_URI__, {useNewUrlParser: true});
         db = await connection.db(global.__MONGO_DB_NAME__);
         const coll = db.collection('quotes');
@@ -63,7 +60,6 @@ describe( 'listQuotes', () =>{
     it('List quotes works', async () => {
         let ctx={}
         await controller.list(ctx);
-        console.log('evaluating')
         expect(ctx.body).toHaveLength(1);
     });
 
