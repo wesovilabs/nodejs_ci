@@ -1,0 +1,61 @@
+{
+  "author": "Iván Corrales Solera <ivan.corrales.solera@gmail.com>",
+  "name": "nodejs_ci",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -q -r dotenv/config index.js",
+    "lint": "eslint --ignore-path .gitignore .",
+    "test": "jest --detectOpenHandles"
+  },
+  "license": "ISC",
+  "jest": {
+    "preset": "@shelf/jest-mongodb",
+    "moduleFileExtensions": [
+      "js",
+      "json"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{ts}",
+      "!**/node_modules/**",
+      "!**/build/**",
+      "!**/coverage/**"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "coverageReporters": [
+      "text",
+      "text-summary"
+    ],
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(js|ts)x?$",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/build/",
+      "/coverage/"
+    ]
+  },
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.6.7"
+  },
+  "devDependencies": {
+    "@shelf/jest-mongodb": "^1.1.0",
+    "dotenv": "^7.0.0",
+    "eslint": "^6.1.0",
+    "eslint-config-strongloop": "^2.1.0",
+    "jest": "^24.8.0",
+    "nodemon": "^1.18.10",
+    "prettier": "1.18.2",
+    "supertest": "^4.0.2"
+  }
+}

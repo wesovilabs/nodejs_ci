@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+
+  nodejs_ci:
+    build:
+      context: ../..
+      dockerfile: scripts/docker-compose/nodejs_ci/Dockerfile
+    depends_on:
+      - db
+    ports:
+      - 8080:8080
+    volumes:
+      - ../..:/opt/app
+      - /opt/app/node_modules
+    environment:
+      PORT: 8080
+      MONGO_URL: mongodb://db:27017/nodejs_ci
+    command: node /opt/app/index.js
+
+  test:
+    build:
+      context: ../testInt
+      dockerfile: Dockerfile
+    depends_on:
+      - nodejs_ci
+    volumes:
+      - ../testInt:/opt/app
+      - /opt/app/node_modules
+    environment:
+      APP: nodejs_ci:8080
+    command: npm test
+
+  db:
+    image: mongo:3.6
+
+
