@@ -3,3 +3,4 @@ yarn.lock
 logs
 *.log
 ci.env
+.idea
